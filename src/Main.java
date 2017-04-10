@@ -2,9 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class Main {
     public static final String ANSI_RED = "\u001B[31m";
@@ -37,8 +34,9 @@ public class Main {
         }
     }
     private static void printCalendarMonthYear(int month, int year) {
+        System.out.println("Calendar for "+ month + " " + year);
         int firstDayOfMonth = LocalDate.of(year, month, 1).getDayOfWeek().getValue();
-        int numberOfMonthDays = currentDate.getMonth().maxLength();
+        int numberOfMonthDays =  LocalDate.of(year, month, 1).getMonth().maxLength();
         printCalendar(numberOfMonthDays, firstDayOfMonth, month);
     }
     private static void printCalendar(int numberOfMonthDays, int firstDayOfMonth, int month) {
