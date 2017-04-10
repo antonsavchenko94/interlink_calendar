@@ -37,26 +37,21 @@ public class Main {
         }
     }
     private static void printCalendarMonthYear(int month, int year) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.clear();
-        calendar.set(year, month - 1, 1);
-        System.out.println("Calendar for "+ calendar.getDisplayName(Calendar.MONTH, Calendar.LONG,
-                Locale.US) + " " + calendar.get(Calendar.YEAR));
-        int firstDayOfMonth = calendar.get(Calendar.DAY_OF_WEEK);
-        int numberOfMonthDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int firstDayOfMonth = LocalDate.of(year, month, 1).getDayOfWeek().getValue();
+        int numberOfMonthDays = currentDate.getMonth().maxLength();
         printCalendar(numberOfMonthDays, firstDayOfMonth, month);
     }
     private static void printCalendar(int numberOfMonthDays, int firstDayOfMonth, int month) {
         int weekdayIndex = 0;
-        System.out.println("Mo  Tu  We  Th  Fr  Sa  Su"); // The order of days depends on your calendar
+        System.out.println("Mo  Tu  We  Th  Fr  Sa  Su");
         for (int day = 2; day < firstDayOfMonth; day++) {
-            System.out.print("    "); //this loop to print the first day in his correct place
+            System.out.print("    ");
             weekdayIndex++;
         }
         for (int day = 1; day <= numberOfMonthDays; day++) {
             if (day == currentDay && month == currentMonth) System.out.print(ANSI_RED + day);
             else if (weekdayIndex == 5 || weekdayIndex == 6) System.out.print(ANSI_BLUE + day);
-            else if (day < 10) // this is just for better visialising because unit number take less space of course than 2
+            else if (day < 10)
             {
                 System.out.print( ANSI_RESET + day+" ");
             }
