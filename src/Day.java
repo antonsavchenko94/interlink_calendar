@@ -23,13 +23,13 @@ public class Day {
         System.out.print(color + day + separator);
     }
         public void printWeek(int day, int month, int currentMonth, int weekdayIndex) {
-            if (ifCurrentDate(day, month, currentMonth ));
+            if (isCurrentDate(day, month, currentMonth ));
             else if (hollidayIndexes.contains(weekdayIndex)) System.out.print(ANSI_BLUE + day);
             else if (day < 10) {
                 printDay(ANSI_RESET, day, " ");
             } else printDay(ANSI_RESET, day, "");
         }
-        public boolean ifCurrentDate(int day, int month, int currentMonth ){
+        public boolean isCurrentDate(int day, int month, int currentMonth ){
             if (day == currentDay && month == currentMonth) {
                 printDay(ANSI_RED, day, "");
                 return true;
