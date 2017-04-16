@@ -4,11 +4,11 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 
 public class Main {
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLUE = "\u001B[34m";
+//    public static final String ANSI_RED = "\u001B[31m";
+//    public static final String ANSI_RESET = "\u001B[0m";
+//    public static final String ANSI_BLUE = "\u001B[34m";
     private static LocalDate currentDate = LocalDate.now();
-    private static int currentDay = currentDate.getDayOfMonth();
+//    private static int currentDay = currentDate.getDayOfMonth();
     private static int currentMonth = currentDate.getMonthValue();
     private static int currentYear = currentDate.getYear();
 
@@ -47,13 +47,15 @@ public class Main {
             weekdayIndex++;
         }
         for (int day = 1; day <= numberOfMonthDays; day++) {
-            if (day == currentDay && month == currentMonth) System.out.print(ANSI_RED + day);
-            else if (weekdayIndex == 5 || weekdayIndex == 6) System.out.print(ANSI_BLUE + day);
-            else if (day < 10)
-            {
-                System.out.print( ANSI_RESET + day+" ");
-            }
-            else System.out.print(ANSI_RESET + day);
+            Day printWeek = new Day();
+            printWeek.printWeek(day, month, currentMonth, weekdayIndex);
+//            if (day == currentDay && month == currentMonth) System.out.print(ANSI_RED + day);
+//            else if (weekdayIndex == 5 || weekdayIndex == 6) System.out.print(ANSI_BLUE + day);
+//            else if (day < 10)
+//            {
+//                System.out.print( ANSI_RESET + day+" ");
+//            }
+//            else System.out.print(ANSI_RESET + day);
             weekdayIndex++;
             if (weekdayIndex == 7) {
                 weekdayIndex = 0;
