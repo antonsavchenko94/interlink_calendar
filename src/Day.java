@@ -23,7 +23,7 @@ public class Day {
         System.out.print(color + day + separator);
     }
         public void printWeek(int day, int month, int currentMonth, int weekdayIndex) {
-            if (isCurrentDate(day, month, currentMonth ));
+            if (isCurrentDate(day, month, currentMonth )) printDay(ANSI_RED, day, "");
             else if (hollidayIndexes.contains(weekdayIndex)) System.out.print(ANSI_BLUE + day);
             else if (day < 10) {
                 printDay(ANSI_RESET, day, " ");
@@ -31,7 +31,6 @@ public class Day {
         }
         public boolean isCurrentDate(int day, int month, int currentMonth ){
             if (day == currentDay && month == currentMonth) {
-                printDay(ANSI_RED, day, "");
                 return true;
             }
             return false;
