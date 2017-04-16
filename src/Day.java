@@ -7,9 +7,9 @@ public class Day {
     private static ArrayList hollidayIndexes = new ArrayList<>(Arrays.asList(5, 6));
     private static LocalDate currentDate = LocalDate.now();
     public static int currentDay = currentDate.getDayOfMonth();
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_CURRENT_DATE_COLOR = "\u001B[31m";
+    public static final String ANSI_RESET_COLOR = "\u001B[0m";
+    public static final String ANSI_WEEKEND_COLOR = "\u001B[34m";
     public static final String SEPARATOR = " ";
 
     public void printDay(String color, int day) {
@@ -23,11 +23,12 @@ public class Day {
         System.out.print(color + day + separator);
     }
         public void printWeek(int day, int month, int currentMonth, int weekdayIndex) {
-            if (isCurrentDate(day, month, currentMonth )) printDay(ANSI_RED, day, "");
-            else if (hollidayIndexes.contains(weekdayIndex)) System.out.print(ANSI_BLUE + day);
+            if (isCurrentDate(day, month, currentMonth ))
+                printDay(ANSI_CURRENT_DATE_COLOR, day, "");
+            else if (hollidayIndexes.contains(weekdayIndex)) System.out.print(ANSI_WEEKEND_COLOR + day);
             else if (day < 10) {
-                printDay(ANSI_RESET, day, " ");
-            } else printDay(ANSI_RESET, day, "");
+                printDay(ANSI_RESET_COLOR, day, " ");
+            } else printDay(ANSI_RESET_COLOR, day, "");
         }
         public boolean isCurrentDate(int day, int month, int currentMonth ){
             if (day == currentDay && month == currentMonth) {
