@@ -7,10 +7,10 @@ public class Day {
     public static final String ANSI_CURRENT_DATE_COLOR = "\u001B[31m";
     public static final String ANSI_RESET_COLOR = "\u001B[0m";
     public static final String ANSI_WEEKEND_COLOR = "\u001B[34m";
-    public static final String SEPARATOR = " ";
 
-    public void printDay(String color, int day, String separator) {
-        System.out.print(color + day + separator);
+    public void printDay(String color, int day) {
+        System.out.print(String.format("%-1s", ""));
+        System.out.print(color + day );
     }
 
     public void printDay(int day, int month, int year) {
@@ -18,7 +18,7 @@ public class Day {
             printCurrentDay(day);
         else if (isWeekend(day, month, year)) {printWeekend(day);}
         else {
-            printDay(ANSI_RESET_COLOR, day, SEPARATOR);
+            printDay(ANSI_RESET_COLOR, day);
         }
     }
 
@@ -29,11 +29,12 @@ public class Day {
     }
 
     private void printWeekend(int day) {
-        System.out.print(ANSI_WEEKEND_COLOR + day + SEPARATOR);
+        System.out.print(String.format("%-1s", ""));
+        System.out.print(ANSI_WEEKEND_COLOR + day);
     }
 
     private void printCurrentDay(int day) {
-        printDay(ANSI_CURRENT_DATE_COLOR, day, SEPARATOR);
+        printDay(ANSI_CURRENT_DATE_COLOR, day);
     }
 
     public boolean isCurrentDate(int day,int month) {
