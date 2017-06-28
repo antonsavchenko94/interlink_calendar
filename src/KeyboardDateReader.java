@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.YearMonth;
 
-
 public class KeyboardDateReader {
     public static YearMonth currentMonthYear = YearMonth.now();
 
