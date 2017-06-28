@@ -17,10 +17,10 @@ public class Calendar {
     }
 
     private static void printBody() {
-        Month numberOfMonthDays = Month.of(date.getMonthValue());
-        LocalDate localDate = LocalDate.of(date.getYear(), date.getMonthValue(), 1);
-        printPreviousMonthDays(localDate);
-        printDays(numberOfMonthDays);
+        Month localDate = Month.of(date.getMonthValue());
+        LocalDate firstDayOfMonth = LocalDate.of(date.getYear(), date.getMonthValue(), 1);
+        printPreviousMonthDays(firstDayOfMonth);
+        printDays(localDate);
     }
 
     private static void printPreviousMonthDays(LocalDate localDate) {
