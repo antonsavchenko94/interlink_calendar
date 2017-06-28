@@ -43,11 +43,11 @@ public class Calendar {
         for (int day = 1; day <= numberOfMonthDays; day++) {
             Day newCalendarDay = new Day();
             newCalendarDay.printDay(day, month, year);
-            printSeparator(day);
+            printSeparatorForDays(day);
         }
     }
 
-    private static void printSeparator(int day) {
+    private static void printSeparatorForDays(int day) {
         if (isLastDayOfWeek(day)) {
             System.out.print("\n");
         } else {
@@ -56,8 +56,8 @@ public class Calendar {
     }
 
     private static boolean isLastDayOfWeek(int day) {
-        String curDay = LocalDate.of(year, month, day).getDayOfWeek().name();
-        return curDay.equals("SUNDAY");
+        String currentDay = LocalDate.of(year, month, day).getDayOfWeek().name();
+        return currentDay.equals("SUNDAY");
     }
 
     private static void addExtraSpace(int day) {
