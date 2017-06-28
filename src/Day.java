@@ -13,18 +13,17 @@ public class Day {
         System.out.print(color + day );
     }
 
-    public void printDay(int day, int month, int year) {
-        if (isCurrentDate(day, month))
-            printCurrentDay(day);
-        else if (isWeekend(day, month, year)) {printWeekend(day);}
+    public void printDay(LocalDate day, int date) {
+        if (isCurrentDate(day, date))
+            printCurrentDay(date);
+        else if (isWeekend(day)) {printWeekend(date);}
         else {
-            printDay(ANSI_RESET_COLOR, day);
+            printDay(ANSI_RESET_COLOR, date);
         }
     }
 
-    private boolean isWeekend(int day, int month, int year) {
-        LocalDate localDate = LocalDate.of(year, month, day);
-        String dayOfWeek = localDate.getDayOfWeek().name();
+    private boolean isWeekend(LocalDate day) {
+        String dayOfWeek = day.getDayOfWeek().name();
         return weekendDaysList.contains(dayOfWeek);
     }
 
@@ -37,11 +36,10 @@ public class Day {
         printDay(ANSI_CURRENT_DATE_COLOR, day);
     }
 
-    public boolean isCurrentDate(int day,int month) {
-        if (LocalDate.now().getDayOfMonth() == day && LocalDate.now().getMonth().getValue() == month) {
+    public boolean isCurrentDate(LocalDate day, int date) {
+        if (LocalDate.now().getDayOfMonth() == date && LocalDate.now().getMonth().getValue() == day.getMonthValue()) {
             return true;
         }
         return false;
     }
 }
-

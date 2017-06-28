@@ -4,7 +4,7 @@ import java.util.Locale;
 
 public class Calendar {
     private static int mondayIndex = 1;
-    private static int year, month;
+    public static int year, month;
 
     public static void printCalendar(YearMonth date) {
         year = date.getYear();
@@ -39,15 +39,17 @@ public class Calendar {
         System.out.println();
     }
 
+
     private static void printDays(int numberOfMonthDays) {
-        for (int day = 1; day <= numberOfMonthDays; day++) {
+        for (int date = 1; date <= numberOfMonthDays; date++) {
             Day newCalendarDay = new Day();
-            newCalendarDay.printDay(day, month, year);
-            printSeparatorForDays(day);
+            LocalDate day = LocalDate.of(year, month, date);
+            newCalendarDay.printDay(day, date);
+            printSeparatorForDay(day);
         }
     }
 
-    private static void printSeparatorForDays(int day) {
+    private static void printSeparatorForDay(LocalDate day) {
         if (isLastDayOfWeek(day)) {
             System.out.print("\n");
         } else {
@@ -55,13 +57,13 @@ public class Calendar {
         }
     }
 
-    private static boolean isLastDayOfWeek(int day) {
-        String currentDay = LocalDate.of(year, month, day).getDayOfWeek().name();
-        return currentDay.equals("SUNDAY");
+    private static boolean isLastDayOfWeek(LocalDate day) {
+//        String curDay = LocalDate.of(year, month, day).getDayOfWeek().name();
+        return day.getDayOfWeek().name().equals("SUNDAY");
     }
 
-    private static void addExtraSpace(int day) {
-        if (day < 10) {
+    private static void addExtraSpace(LocalDate day) {
+        if (day.getDayOfMonth() < 10) {
             System.out.print(String.format("%-2s", ""));
         } else {
             System.out.print(String.format("%-1s", ""));
@@ -69,4 +71,3 @@ public class Calendar {
     }
 
 }
-
