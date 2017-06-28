@@ -3,30 +3,29 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Calendar {
-    private static int mondayIndex = 1;
-    public static int year, month;
+    public static YearMonth date;
 
-    public static void printCalendar(YearMonth date) {
-        year = date.getYear();
-        month = date.getMonthValue();
+    public static void printCalendar(YearMonth yearMonth) {
+        date = yearMonth;
         printInfo();
         printHeader();
         printBody();
     }
 
     private static void printInfo() {
-        System.out.println("Calendar for " + month + " " + year);
+        System.out.println("Calendar for " + date.getMonthValue() + " " + date.getYear());
     }
 
     private static void printBody() {
-        int numberOfMonthDays = Month.of(month).maxLength();
-        int firstDayOfMonth = LocalDate.of(year, month, 1).getDayOfWeek().getValue();
-        printPreviousMonthDays(firstDayOfMonth);
+        Month numberOfMonthDays = Month.of(date.getMonthValue());
+        LocalDate localDate = LocalDate.of(date.getYear(), date.getMonthValue(), 1);
+        printPreviousMonthDays(localDate);
         printDays(numberOfMonthDays);
     }
 
-    private static void printPreviousMonthDays(int firstDayOfMonth) {
-        for (int day = mondayIndex; day < firstDayOfMonth; day++) {
+    private static void printPreviousMonthDays(LocalDate localDate) {
+        int firstDayOfMonth = localDate.getDayOfWeek().getValue();
+        for (int day = 1; day < firstDayOfMonth; day++) {
             System.out.print("    ");
         }
     }
@@ -40,11 +39,12 @@ public class Calendar {
     }
 
 
-    private static void printDays(int numberOfMonthDays) {
-        for (int date = 1; date <= numberOfMonthDays; date++) {
+    private static void printDays(Month numberOfMonthDays) {
+        int maxLengthOfMonth = numberOfMonthDays.maxLength();
+        for (int numberOfDay = 1; numberOfDay <= maxLengthOfMonth; numberOfDay++) {
             Day newCalendarDay = new Day();
-            LocalDate day = LocalDate.of(year, month, date);
-            newCalendarDay.printDay(day, date);
+            LocalDate day = LocalDate.of(date.getYear(), date.getMonthValue(), numberOfDay);
+            newCalendarDay.printDay(day, numberOfDay);
             printSeparatorForDay(day);
         }
     }
@@ -58,7 +58,6 @@ public class Calendar {
     }
 
     private static boolean isLastDayOfWeek(LocalDate day) {
-//        String curDay = LocalDate.of(year, month, day).getDayOfWeek().name();
         return day.getDayOfWeek().name().equals("SUNDAY");
     }
 
