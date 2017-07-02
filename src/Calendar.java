@@ -58,7 +58,7 @@ public class Calendar {
     }
 
     private static boolean isLastDayOfWeek(LocalDate day) {
-        return day.getDayOfWeek().name().equals("SUNDAY");
+        return day.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
 
     private static void addExtraSpace(LocalDate day) {

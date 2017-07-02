@@ -1,9 +1,7 @@
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
 public class Day {
-    private static List<String> weekendDaysList = Arrays.asList( "SATURDAY", "SUNDAY");
     public static final String ANSI_CURRENT_DATE_COLOR = "\u001B[31m";
     public static final String ANSI_RESET_COLOR = "\u001B[0m";
     public static final String ANSI_WEEKEND_COLOR = "\u001B[34m";
@@ -14,7 +12,7 @@ public class Day {
     }
 
     public void printDay(LocalDate day, int date) {
-        if (isCurrentDate(day, date))
+        if (isCurrentDate(day))
             printCurrentDay(date);
         else if (isWeekend(day)) {printWeekend(date);}
         else {
@@ -23,8 +21,8 @@ public class Day {
     }
 
     private boolean isWeekend(LocalDate day) {
-        String dayOfWeek = day.getDayOfWeek().name();
-        return weekendDaysList.contains(dayOfWeek);
+        return day.getDayOfWeek() == DayOfWeek.SATURDAY ||
+                day.getDayOfWeek() == DayOfWeek.SUNDAY ;
     }
 
     private void printWeekend(int day) {
@@ -36,8 +34,8 @@ public class Day {
         printDay(ANSI_CURRENT_DATE_COLOR, day);
     }
 
-    public boolean isCurrentDate(LocalDate day, int date) {
-        if (LocalDate.now().getDayOfMonth() == date && LocalDate.now().getMonth().getValue() == day.getMonthValue()) {
+    public boolean isCurrentDate(LocalDate day) {
+        if (day.equals(LocalDate.now())) {
             return true;
         }
         return false;
